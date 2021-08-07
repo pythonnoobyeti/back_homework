@@ -1,0 +1,32 @@
+{
+    "name": "back_homework",
+    "version": "1.0.0",
+    "description": "back homework",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "getDate": "./homework_1/index.js",
+        "guesIt": "./homework_2/index.js",
+        "doNodeImport": "./homework_3/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pythonnoobyeti/back_homework.git"
+    },
+    "keywords": [
+        "backend",
+        "homework"
+    ],
+    "author": "Alex Filenko",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/pythonnoobyeti/back_homework/issues"
+    },
+    "homepage": "https://github.com/pythonnoobyeti/back_homework#readme",
+    "dependencies": {
+        "yargs": "^17.1.0"
+    }
+}
