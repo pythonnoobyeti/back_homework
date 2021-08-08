@@ -10,7 +10,7 @@ const allowParams = {
 };
 
 const argv = yargs(hideBin(process.argv)).argv;
-const [key, value] = getKeyByValue(argv, allowParams);
+const targetParams = getKeyByValue(argv, allowParams);
 const current = argv._.includes("current");
 const add = argv._.includes("add");
 const sub = argv._.includes("sub");
@@ -25,35 +25,47 @@ if (current) {
 
 function doAddSub(direction) {
   const date = new Date();
-  if (key == "year") date.setFullYear(date.getFullYear() + value * direction);
-  if (key == "month") date.setMonth(date.getMonth() + value * direction);
-  if (key == "date") date.setDate(date.getDate() + value * direction);
+  Object.keys(targetParams).forEach((key) => {
+    if (key == "year")
+      date.setFullYear(date.getFullYear() + targetParams[key] * direction);
+    if (key == "month")
+      date.setMonth(date.getMonth() + targetParams[key] * direction);
+    if (key == "date")
+      date.setDate(date.getDate() + targetParams[key] * direction);
+  });
   return date.toISOString();
 }
 
 function doGetDate() {
   const date = new Date();
-  if (key == "year") return date.getFullYear();
-  if (key == "month") return date.getMonth() + 1;
-  if (key == "date") return date.getDate();
-  return date.toISOString();
+  if (isEmpty(targetParams)) return date.toISOString();
+  let answer = [];
+  Object.keys(targetParams).forEach((key) => {
+    if (key == "year") answer.push(date.getFullYear());
+    if (key == "month") answer.push(date.getMonth() + 1);
+    if (key == "date") answer.push(date.getDate());
+  });
+  return answer;
 }
 
 function getKeyByValue(argv, obj) {
   const argvKeys = Object.keys(argv).slice(1, -1);
   const objKeys = Object.keys(obj);
-  let firstAllowKey;
-  let firstAllValue;
+  let targetParams = {};
 
   argvKeys.forEach((param) => {
     objKeys.forEach((key) => {
       if (allowParams[key].includes(param)) {
-        firstAllowKey = key;
-        firstAllValue = argv[param];
-        return;
+        targetParams[key] = argv[param];
       }
     });
-    if (firstAllowKey != undefined) return;
   });
-  return [firstAllowKey, firstAllValue];
+  return targetParams;
+}
+
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
 }
