@@ -26,7 +26,5 @@
         "url": "https://github.com/pythonnoobyeti/back_homework/issues"
     },
     "homepage": "https://github.com/pythonnoobyeti/back_homework#readme",
-    "dependencies": {
-        "yargs": "^17.1.0"
-    }
+    "dependencies": {}
 }
