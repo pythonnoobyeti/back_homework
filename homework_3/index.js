@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-const { sayHiLev } = require("./my_module");
+const { main } = require("./date_module");
 
-console.log(sayHiLev());
+main();

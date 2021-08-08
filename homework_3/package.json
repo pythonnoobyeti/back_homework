@@ -1,12 +1,19 @@
 {
-  "name": "homework_3",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "homework_3",
+    "version": "1.0.0",
+    "description": "test package",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "test",
+        "onpoint"
+    ],
+    "author": "jsestro",
+    "license": "ISC",
+    "homepage": "https://github.com/pythonnoobyeti/back_homework#readme",
+    "dependencies": {
+        "yargs": "^17.1.0"
+    }
 }
