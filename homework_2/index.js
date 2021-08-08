@@ -13,15 +13,16 @@ console.log(
 );
 
 input.on("line", (data) => {
+  let inputData = Number(data);
   if (data === "exit") {
     console.log("Congratulations you are a looser!");
     process.exit(0);
-  } else if (Number(data) === number) {
+  } else if (inputData === number) {
     console.log("Congratulations you are winner!");
     process.exit(0);
-  } else if (Number(data) > number) {
+  } else if (inputData > number) {
     console.log("Number is smaller!");
-  } else if (Number(data) < number) {
+  } else if (inputData < number) {
     console.log("Number is bigger!");
   } else {
     if (breakCounter > 0) {
