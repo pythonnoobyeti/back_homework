@@ -14,7 +14,7 @@
     "license": "ISC",
     "homepage": "https://github.com/pythonnoobyeti/back_homework#readme",
     "dependencies": {
-        "test-date-module": "^1.0.0",
+        "onpoint-backend-test-filenko": "^1.0.0",
         "yargs": "^17.1.0"
     }
 }
