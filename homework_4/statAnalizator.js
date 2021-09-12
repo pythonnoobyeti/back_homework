@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const path = require("path");
-const { getStats } = require("./additionalFunc");
+import path from "path";
+import { getStats } from "./additionalFunc.js";
 
-const pathToSatats = path.join(__dirname, "stats");
+const __dirname = path.resolve();
+const pathToSatats = path.join(__dirname, "homework_4", "stats");
 const stats = getStats(pathToSatats);
-console.log(stats)
+console.log(stats);

@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 function getRandomNumber(minimum, maximum) {
   const min = minimum;
@@ -35,37 +35,35 @@ function createJSON(gameTryWins, gameTryLose) {
 }
 
 function getStats(pathToSatats) {
-  let stats = { 
-    totalGame: 0, 
-    totalGameTry: 0, 
-    totalGameTryWins: 0, 
-    totalGameTryLose: 0, 
+  let stats = {
+    totalGame: 0,
+    totalGameTry: 0,
+    totalGameTryWins: 0,
+    totalGameTryLose: 0,
     totalProcentage: 0,
-  }
-  
+  };
+
   if (!fs.existsSync(pathToSatats)) {
-    console.log("Пака не обнаружена")
+    console.log("Пака не обнаружена");
     return {};
   }
   const files = fs.readdirSync(pathToSatats);
   files.forEach((file) => {
     const currentPath = path.join(pathToSatats, file);
-    const rowData = fs.readFileSync(currentPath, "utf-8")
-      const parsedData = JSON.parse(rowData);
-      stats.totalGame += 1;
-      stats.totalGameTry += parsedData["totalTry"];
-      stats.totalGameTryWins += parsedData["gameTryWins"];
-      stats.totalGameTryLose += parsedData["gameTryLose"];
-    });
-    stats.totalProcentage = parseFloat(
-      ((stats.totalGameTryWins * 100) / (stats.totalGameTryWins + stats.totalGameTryLose))
-      .toFixed(2));
+    const rowData = fs.readFileSync(currentPath, "utf-8");
+    const parsedData = JSON.parse(rowData);
+    stats.totalGame += 1;
+    stats.totalGameTry += parsedData["totalTry"];
+    stats.totalGameTryWins += parsedData["gameTryWins"];
+    stats.totalGameTryLose += parsedData["gameTryLose"];
+  });
+  stats.totalProcentage = parseFloat(
+    (
+      (stats.totalGameTryWins * 100) /
+      (stats.totalGameTryWins + stats.totalGameTryLose)
+    ).toFixed(2)
+  );
   return stats;
 }
 
-module.exports = {
-  getRandomNumber,
-  changeNameIfDouble,
-  createJSON,
-  getStats,
-};
+export { getRandomNumber, changeNameIfDouble, createJSON, getStats };

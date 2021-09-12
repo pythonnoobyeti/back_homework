@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const readline = require("readline");
+
+import readline from "readline";
 
 const input = readline.createInterface({
   input: process.stdin,

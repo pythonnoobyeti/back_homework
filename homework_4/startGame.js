@@ -1,14 +1,16 @@
 #!/usr/bin/env node
-const fs = require("fs");
-var path = require("path");
-const readline = require("readline");
-const {
+
+import fs from "fs";
+import path from "path";
+import readline from "readline";
+import {
   getRandomNumber,
   changeNameIfDouble,
   createJSON,
-} = require("./additionalFunc");
+} from "./additionalFunc.js";
 
-const pathToSatats = path.join(__dirname, "stats");
+const __dirname = path.resolve();
+const pathToSatats = path.join(__dirname, "homework_4", "stats");
 
 let logFileName = changeNameIfDouble(process.argv[2], pathToSatats);
 
