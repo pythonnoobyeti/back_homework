@@ -2,5 +2,9 @@
   "book_1": {
     "autor": "Name",
     "pages": "1234"
+  },
+  "book_2": {
+    "autor": "Name",
+    "pages": "1234"
   }
 }

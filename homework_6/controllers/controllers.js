@@ -1,32 +1,67 @@
-import fs from "fs";
 import path from "path";
+import {
+  readBooks,
+  writeBooks,
+  validateFields,
+  createId,
+} from "../functions/functions.js";
 
-const __dirname = path.resolve();
+const pathToBooksJSON = path.join(path.resolve(), "homework_6", "books.json");
 
-function login(req, res) {
+const login = (req, res) => {
   res.status(201).json({ id: 1, mail: "test@mail.ru" });
-}
+};
 
-function getAllBooks(req, res) {
-  if (req.query.id == 2) res.send("Hello");
-  else res.send("By");
-}
+const getAllBooks = async (req, res) => {
+  const books = await readBooks(pathToBooksJSON);
+  res.json(books);
+};
 
-function getBook(req, res) {
-  const params = req.params;
-  res.status(200).json(params);
-}
+const getBook = async (req, res) => {
+  const { id } = req.params;
+  const books = await readBooks(pathToBooksJSON);
+  const targetBook = books.filter((book) => book.id === id)[0];
+  if (targetBook) res.json(targetBook);
+  else res.status(404).send("Book not found!");
+};
 
-function createBook(req, res) {
-  res.status(200).json({ id: 1, mail: "test@mail.ru" });
-}
+const createBook = async (req, res) => {
+  let books = await readBooks(pathToBooksJSON);
+  const newBook = validateFields(req.body);
+  if (newBook) {
+    const id = createId(books);
+    newBook.id = id;
+    books.push(newBook);
+    await writeBooks(pathToBooksJSON, books);
+    res.json(newBook);
+  } else res.status(404).send("Check require fields in documentation.");
+};
 
-function changeBook(req, res) {
-  res.status(200).json({ id: 1, mail: "test@mail.ru" });
-}
+const changeBook = async (req, res) => {
+  const { id } = req.params;
+  const books = await readBooks(pathToBooksJSON);
+  const targetIndex = books.findIndex((book) => book.id === id);
 
-function deleteBook(req, res) {
-  res.status(200).json({ id: 1, mail: "test@mail.ru" });
-}
+  if (targetIndex === -1) res.status(404).send("Book not found!");
+  else {
+    const fieldToChange = req.body;
+    const allowFields = Object.keys(books[targetIndex]);
+    Object.keys(books[targetIndex]).forEach((field) => {
+      if (allowFields.includes(field) && field != "id")
+        books[targetIndex][field] = fieldToChange[field];
+    });
+    console.log(books);
+    await writeBooks(pathToBooksJSON, books);
+    res.send("OK");
+  }
+};
+
+const deleteBook = async (req, res) => {
+  const { id } = req.params;
+  const books = await readBooks(pathToBooksJSON);
+  const filterBooks = books.filter((book) => book.id != id);
+  await writeBooks(pathToBooksJSON, filterBooks);
+  res.send("OK");
+};
 
 export { login, getAllBooks, getBook, createBook, changeBook, deleteBook };

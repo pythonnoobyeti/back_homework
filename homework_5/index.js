@@ -2,7 +2,7 @@
 import readline from "readline";
 import { getCurrentWeather } from "./functions.js";
 import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: "./.env" });
 
 const ACCESS_KEY = process.env.ACCESS_KEY;
 const BASE_URL = "http://api.weatherstack.com";
