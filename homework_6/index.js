@@ -4,11 +4,16 @@ import userRouter from "./routers/userRouter.js";
 import booksRouter from "./routers/booksRouter.js";
 import fs from "fs";
 
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 const port = 3000;
 
-if (!fs.existsSync("./homework_6/books.json")) {
-  const ws = fs.createWriteStream("./homework_6/books.json");
+if (!fs.existsSync(`${__dirname}/books.json`)) {
+  const ws = fs.createWriteStream(`${__dirname}/books.json`);
   ws.write("[]");
   ws.close();
 }
