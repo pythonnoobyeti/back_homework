@@ -28,11 +28,4 @@ const createId = (books) => {
   return String(id);
 };
 
-const validateFields = (data) => {
-  const { title, description, authors, cover } = data;
-  const isFieldOk = title && description && authors && cover;
-  if (isFieldOk) return data;
-  return null;
-};
-
-export { readBooks, writeBooks, validateFields, createId };
+export { readBooks, writeBooks, createId };

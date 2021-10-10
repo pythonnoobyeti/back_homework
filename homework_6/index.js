@@ -2,6 +2,7 @@
 import express from "express";
 import userRouter from "./routers/userRouter.js";
 import booksRouter from "./routers/booksRouter.js";
+import { validateFields } from "./middleware.js";
 import fs from "fs";
 
 import { fileURLToPath } from "url";
@@ -20,6 +21,7 @@ if (!fs.existsSync(`${__dirname}/books.json`)) {
 
 app
   .use(express.json())
+  .use(validateFields)
   .use("/api/user", userRouter)
   .use("/api/books", booksRouter);
 

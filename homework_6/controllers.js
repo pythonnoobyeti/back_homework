@@ -1,12 +1,6 @@
-import path from "path";
-import {
-  readBooks,
-  writeBooks,
-  validateFields,
-  createId,
-} from "../functions/functions.js";
+import { readBooks, writeBooks, createId } from "./functions.js";
 
-const pathToBooksJSON = path.join(path.resolve(), "homework_6", "books.json");
+const pathToBooksJSON = "./books.json";
 
 const login = (req, res) => {
   res.status(201).json({ id: 1, mail: "test@mail.ru" });
@@ -26,11 +20,11 @@ const getBook = async (req, res) => {
 };
 
 const createBook = async (req, res) => {
-  let books = await readBooks(pathToBooksJSON);
-  const newBook = validateFields(req.body);
-  if (newBook) {
-    const id = createId(books);
-    newBook.id = id;
+  if (req.validationOK) {
+    let books = await readBooks(pathToBooksJSON);
+    const newBook = req.body;
+    const newId = createId(books);
+    newBook.id = newId;
     books.push(newBook);
     await writeBooks(pathToBooksJSON, books);
     res.json(newBook);
@@ -41,19 +35,19 @@ const changeBook = async (req, res) => {
   const { id } = req.params;
   const books = await readBooks(pathToBooksJSON);
   const targetIndex = books.findIndex((book) => book.id === id);
+  let bookIsChange = false;
 
   if (targetIndex === -1) res.status(404).send("Book not found!");
-  else {
-    const fieldToChange = req.body;
-    const allowFields = Object.keys(books[targetIndex]);
-    Object.keys(books[targetIndex]).forEach((field) => {
-      if (allowFields.includes(field) && field != "id")
-        books[targetIndex][field] = fieldToChange[field];
-    });
-    console.log(books);
-    await writeBooks(pathToBooksJSON, books);
-    res.send("OK");
+
+  for (let field in req.body) {
+    if (field in books[targetIndex] && field != "id") {
+      books[targetIndex][field] = req.body[field];
+      bookIsChange = true;
+    }
   }
+
+  if (bookIsChange) await writeBooks(pathToBooksJSON, books);
+  res.send("OK");
 };
 
 const deleteBook = async (req, res) => {
