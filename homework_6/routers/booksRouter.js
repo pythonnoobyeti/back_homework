@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { validateFields } from "../middleware.js";
 import {
   getAllBooks,
   getBook,
@@ -12,7 +13,7 @@ const router = Router();
 router
   .get("/", getAllBooks)
   .get("/:id", getBook)
-  .post("/", createBook)
+  .post("/", validateFields, createBook)
   .put("/:id", changeBook)
   .delete("/:id", deleteBook);
 
