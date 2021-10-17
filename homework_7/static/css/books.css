@@ -1,0 +1,55 @@
+.book {
+  padding: 20px;
+  min-height: 6rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.book:nth-child(odd) {
+  background-color: #dedee14d;
+}
+
+.book__index {
+  font-size: 2.4rem;
+  margin-right: 2rem;
+  font-weight: 700;
+}
+
+.book__title {
+  font-weight: 700;
+  font-size: 2.4rem;
+  display: block;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.book__title:hover {
+  color: rgb(0, 21, 159);
+}
+
+.book__btn-block {
+  margin-left: auto;
+}
+
+.book__btn {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.book__btn:hover {
+  color: rgb(0, 21, 159);
+}
+
+.book__btn-create {
+  display: block;
+  align-items: center;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0;
+}
+

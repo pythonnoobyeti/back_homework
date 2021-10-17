@@ -1,0 +1,25 @@
+mixin form
+  - var bookTitle = book&&book.title || ''
+  - var bookId = book&&book.id || ''
+  - var bookDescr = book&&book.description || ''
+  - var bookAuthors = book&&book.authors.join(', ') || ''
+  - var bookCover = book&&book.cover || ''
+
+  form(method='POST')
+    .form__title= title || ''
+    .form__fields
+      label(for='title') Title
+      input(name='title' type='text' id='title' value=bookTitle placeholder='The Ghost')
+      label(for='description') Description
+      input(name='description' type='textarea' id='description' value=bookDescr placeholder='Do you know who a ghost........')
+      label(for='authors') Authors
+      input(name='authors' type='text' id='authors' value=bookAuthors placeholder='Robert Harris, Harry Potter')
+      label(for='cover') Cover
+      input(name='cover' type='text' id='cover' value=bookCover)
+    .form__btn-block 
+      button.form_btn-submit(type='submit')= mode
+  .btn-block
+      if book
+        a.book__btn.book__btn-back(href="/books/" + bookId) Go back
+      else
+        a.book__btn.book__btn-back(href="/books") Go back

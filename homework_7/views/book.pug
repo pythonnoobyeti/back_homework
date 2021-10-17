@@ -1,0 +1,19 @@
+extends ./layout.pug
+
+block head
+  link(rel="stylesheet" type="text/css" href="/css/book.css")
+
+block content
+  - var authorsLenght = book.authors.length - 1
+  .book
+    .book__info
+      .book__title= book.title
+      each author, index in book.authors
+        span.book__author= author
+        if index < authorsLenght
+          span , 
+      .book__description= book.description
+    .book__btn-block
+      a.book__btn.book__btn-back(href="/books") Go back
+      a.book__btn.book__btn-edit(href="/books/" + book.id + "/edit") Edit
+      a.book__btn.book__btn-delete(href="/books/" + book.id + "/delete") Delete

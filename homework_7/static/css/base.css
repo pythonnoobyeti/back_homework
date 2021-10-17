@@ -1,0 +1,32 @@
+* {
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+
+nav {
+  padding: 1rem 1.5rem;
+  background-color: #959ab94d;
+  border-bottom: 5px solid #66686c;
+}
+
+.nav__item {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 1.4rem;
+}
+
+.nav__item:hover {
+  color: rgb(0, 21, 159);
+}
+.nav__item.active {
+  font-weight: 900;
+}

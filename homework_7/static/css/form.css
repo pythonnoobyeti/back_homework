@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+form {
+  width: 30%;
+}
+
+.form__title {
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+.form__fields {
+  flex-direction: column;
+  display: flex;
+}
+
+.form__btn-block {
+  margin-top: 1rem;
+}
+
+.book__btn {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.book__btn:hover {
+  color: rgb(0, 21, 159);
+}

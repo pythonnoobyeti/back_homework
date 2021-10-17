@@ -1,0 +1,31 @@
+.book {
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  min-height: 10rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+
+.book__title {
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
+.book__description {
+  margin-top: 2rem;
+}
+
+.book__btn {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.book__btn:hover {
+  color: rgb(0, 21, 159);
+}
