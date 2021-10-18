@@ -2,7 +2,7 @@
 import express from "express";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path, { dirname } from "path";
 import userRouter from "./routers/userRouter.js";
 import booksRouter from "./routers/booksRouter.js";
 import pagesRouter from "./routers/pagesRouter.js";
@@ -21,7 +21,8 @@ const app = express();
 const port = 3000;
 
 app.set("view engine", "pug");
-app.use(express.static("static"));
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "static")));
 
 //Middleware
 app.use(express.json());
