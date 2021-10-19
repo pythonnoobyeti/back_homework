@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateFields } from "../middleware.js";
+import { validateFields } from "../middelwares/validateFields.js";
 import {
   getAllBooks,
   getBook,

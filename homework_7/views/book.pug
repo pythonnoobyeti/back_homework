@@ -13,6 +13,8 @@ block content
         if index < authorsLenght
           span , 
       .book__description= book.description
+    .book__cover
+      img(src="/img/"+book.cover)
     .book__btn-block
       a.book__btn.book__btn-back(href="/books") Go back
       a.book__btn.book__btn-edit(href="/books/" + book.id + "/edit") Edit

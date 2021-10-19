@@ -1,5 +1,6 @@
 const validateFields = (req, res, next) => {
-  let { title, description, authors, cover } = req.body;
+  let { title, description, authors } = req.body;
+  let cover = req.file.filename;
   const isFieldOk = title && description && authors && cover;
   if (!isFieldOk)
     return res.status(404).send("Check require fields in documentation.");

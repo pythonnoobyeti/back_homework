@@ -8,8 +8,8 @@ import booksRouter from "./routers/booksRouter.js";
 import pagesRouter from "./routers/pagesRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const pathToBooksJSON = `${__dirname}/books.json`;
+const __root = dirname(__filename);
+const pathToBooksJSON = `${__root}/books.json`;
 
 if (!fs.existsSync(pathToBooksJSON)) {
   const ws = fs.createWriteStream(pathToBooksJSON);
@@ -21,20 +21,12 @@ const app = express();
 const port = 3000;
 
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "static")));
-
-//Middleware
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: false,
-  })
-);
+app.set("views", path.join(__root, "views"));
+app.use(express.static(path.join(__root, "static")));
 
 // API
 app.use("/api/user", userRouter);
-app.use("/api/books", booksRouter);
+app.use("/api/books", express.json(), booksRouter);
 
 // Pages
 app.use("/", pagesRouter);
@@ -43,4 +35,4 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-export { pathToBooksJSON };
+export { pathToBooksJSON, __root };

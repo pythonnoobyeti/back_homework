@@ -17,6 +17,8 @@ block content
           span.book__author= author
           if index < authorsLenght
             span , 
+      .book__cover
+        img(src="/img/"+book.cover)
       .book__btn-block
         a.book__btn.book__btn-edit(href="/books/" + bookId + "/edit") Edit
         a.book__btn.book__btn-delete(href="/books/" + bookId + "/delete") Delete

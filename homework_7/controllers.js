@@ -18,7 +18,8 @@ const getBook = async (req) => {
 
 const createBook = async (req) => {
   let books = await readBooks(pathToBooksJSON);
-  let { title, description, authors, cover } = req.body;
+  let { title, description, authors } = req.body;
+  let cover = req.file.filename;
   const newBook = { title, description, authors, cover };
   const newId = createId(books);
   newBook.id = newId;

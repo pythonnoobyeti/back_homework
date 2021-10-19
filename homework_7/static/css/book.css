@@ -5,7 +5,11 @@
   min-height: 10rem;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+.book__info {
+  margin-right: 2rem;
 }
 
 
@@ -16,6 +20,16 @@
 
 .book__description {
   margin-top: 2rem;
+}
+
+.book__cover {
+  max-width: 5rem;
+}
+.book__cover img {
+  max-width: 100%;
+}
+.book__btn-block {
+  margin-left: auto;
 }
 
 .book__btn {

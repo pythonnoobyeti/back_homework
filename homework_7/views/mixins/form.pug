@@ -5,7 +5,7 @@ mixin form
   - var bookAuthors = book&&book.authors.join(', ') || ''
   - var bookCover = book&&book.cover || ''
 
-  form(method='POST')
+  form(method='POST' enctype='multipart/form-data')
     .form__title= title || ''
     .form__fields
       label(for='title') Title
@@ -15,7 +15,7 @@ mixin form
       label(for='authors') Authors
       input(name='authors' type='text' id='authors' value=bookAuthors placeholder='Robert Harris, Harry Potter')
       label(for='cover') Cover
-      input(name='cover' type='text' id='cover' value=bookCover)
+      input(name='cover' type='file' id='cover' value="/img/"+bookCover)
     .form__btn-block 
       button.form_btn-submit(type='submit')= mode
   .btn-block

@@ -6,7 +6,8 @@ import {
   changeBook,
   deleteBook,
 } from "../controllers.js";
-import { validateFields } from "../middleware.js";
+import { validateFields } from "../middelwares/validateFields.js";
+import { upload } from "../middelwares/upload.js";
 
 const router = Router();
 
@@ -46,10 +47,15 @@ router.get("/books/book/create", (req, res) => {
   });
 });
 
-router.post("/books/book/create", validateFields, async (req, res) => {
-  let newBook = await createBook(req);
-  res.redirect(`/books/${newBook.id}`);
-});
+router.post(
+  "/books/book/create",
+  upload.single("cover"),
+  validateFields,
+  async (req, res) => {
+    let newBook = await createBook(req);
+    res.redirect(`/books/${newBook.id}`);
+  }
+);
 
 //Delete book
 router.get("/books/:id/delete", async (req, res) => {
@@ -67,9 +73,14 @@ router.get("/books/:id/edit", async (req, res) => {
   });
 });
 
-router.post("/books/:id/edit", validateFields, async (req, res) => {
-  let changedBook = await changeBook(req);
-  res.redirect(`/books/${changedBook.id}`);
-});
+router.post(
+  "/books/:id/edit",
+  upload.single("cover"),
+  validateFields,
+  async (req, res) => {
+    let changedBook = await changeBook(req);
+    res.redirect(`/books/${changedBook.id}`);
+  }
+);
 
 export default router;
