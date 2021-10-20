@@ -1,0 +1,19 @@
+mixin formCreate
+  form(method='POST' enctype='multipart/form-data')
+    .form__title= mode + " book"
+    .form__fields
+      label(for='title') Title
+      input(name='title' type='text' id='title' placeholder='The Ghost' required)
+      label(for='description') Description
+      input(name='description' type='textarea' id='description' placeholder='Do you know who a ghost........' required)
+      label(for='authors') Authors
+      input(name='authors' type='text' id='authors' placeholder='Robert Harris, Harry Potter' required)
+      label(for='cover') Cover
+      input(name='cover' type='file' id='cover' required)
+    .form__btn-block 
+      button.form_btn-submit(type='submit')= mode
+  .btn-block
+      if book
+        a.book__btn.book__btn-back(href="/books/" + book.id) Go back
+      else
+        a.book__btn.book__btn-back(href="/books") Go back

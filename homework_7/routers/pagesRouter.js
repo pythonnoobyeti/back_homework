@@ -6,6 +6,7 @@ import {
   changeBook,
   deleteBook,
 } from "../controllers.js";
+import { checkRequiredFields } from "../middelwares/checkRequiredFields.js";
 import { validateFields } from "../middelwares/validateFields.js";
 import { upload } from "../middelwares/upload.js";
 
@@ -42,7 +43,6 @@ router.get("/books/:id", async (req, res) => {
 // Create book
 router.get("/books/book/create", (req, res) => {
   res.render("form", {
-    title: "Create book",
     mode: "Create",
   });
 });
@@ -50,6 +50,7 @@ router.get("/books/book/create", (req, res) => {
 router.post(
   "/books/book/create",
   upload.single("cover"),
+  checkRequiredFields,
   validateFields,
   async (req, res) => {
     let newBook = await createBook(req);
@@ -67,8 +68,7 @@ router.get("/books/:id/delete", async (req, res) => {
 router.get("/books/:id/edit", async (req, res) => {
   let targetBook = await getBook(req);
   res.render("form", {
-    title: "Change book",
-    mode: "Change",
+    mode: "Update",
     book: targetBook,
   });
 });

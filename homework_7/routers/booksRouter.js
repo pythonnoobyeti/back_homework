@@ -1,5 +1,7 @@
 import { Router } from "express";
+import { checkRequiredFields } from "../middelwares/checkRequiredFields.js";
 import { validateFields } from "../middelwares/validateFields.js";
+import { upload } from "../middelwares/upload.js";
 import {
   getAllBooks,
   getBook,
@@ -24,10 +26,16 @@ router.get("/:id", async (req, res) => {
 });
 
 //Create book
-router.post("/", validateFields, async (req, res) => {
-  const newBook = await createBook(req);
-  res.json(newBook);
-});
+router.post(
+  "/",
+  upload.single("cover"),
+  checkRequiredFields,
+  validateFields,
+  async (req, res) => {
+    const newBook = await createBook(req);
+    res.json(newBook);
+  }
+);
 
 //Delete book
 router.delete("/:id", async (req, res) => {
@@ -37,8 +45,8 @@ router.delete("/:id", async (req, res) => {
 });
 
 //Change book
-router.put("/:id", async (req, res) => {
-  const changedBook = changeBook(req);
+router.put("/:id", upload.single("cover"), validateFields, async (req, res) => {
+  const changedBook = await changeBook(req);
   if (!changedBook) return res.status(404).send("Book not found!");
   res.send("OK");
 });

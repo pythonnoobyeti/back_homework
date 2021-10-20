@@ -1,5 +1,7 @@
 import { readBooks, writeBooks, createId } from "./functions.js";
-import { pathToBooksJSON } from "./index.js";
+import { pathToBooksJSON, __root } from "./index.js";
+import fs from "fs";
+import path from "path";
 
 const login = (req, res) => {
   res.status(201).json({ id: 1, mail: "test@mail.ru" });
@@ -41,6 +43,18 @@ const changeBook = async (req) => {
       books[targetIndex][field] = req.body[field];
       bookIsChange = true;
     }
+  }
+
+  if (req.file) {
+    fs.unlink(
+      path.join(__root, "static", "img", books[targetIndex].cover),
+      (err) => {
+        if (err) throw err; // не удалось удалить файл
+        console.log("Файл успешно удалён");
+      }
+    );
+    books[targetIndex].cover = req.file.filename;
+    bookIsChange = true;
   }
 
   if (bookIsChange) await writeBooks(pathToBooksJSON, books);

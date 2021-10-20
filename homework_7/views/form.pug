@@ -4,4 +4,7 @@ block head
   link(rel="stylesheet" type="text/css" href="/css/form.css")
 
 block content
-  +form
+  if mode==="Create"
+    +formCreate
+  if mode==="Update"
+    +formUpdate
